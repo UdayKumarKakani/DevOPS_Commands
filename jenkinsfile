@@ -1,7 +1,8 @@
 pipeline {
   environment {
     registry = "uday4r4nds/microserviceone"
-    registryCredential = ‘Dockerhub’
+    registryCredential = 'Dockerhub'
+    dockerImage = ''
   }
   agent any
   stages {
