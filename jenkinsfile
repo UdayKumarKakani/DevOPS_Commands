@@ -1,16 +1,21 @@
 pipeline {
-    agent any
-
-	environment {
-		dockerHome = tool 'MyDocker'
-		mavenHome  = tool 'myMaven'
-		PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
-	}
-    stages {
-        stage('Test') {
-            steps {
-               echo "$PATH"
-            }
-        }
+  environment {
+    registry = "uday4r4nds/microserviceone"
+    registryCredential = ‘dockerhub’
+  }
+  agent any
+  stages {
+    stage('Cloning Git') {
+      steps {
+        git 'https://github.com/UdayKumarKakani/MicroserviceOne'
+      }
     }
+    stage('Building image') {
+      steps{
+        script {
+          docker.build registry + ":$BUILD_NUMBER"
+        }
+      }
+    }
+  }
 }
