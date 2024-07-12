@@ -3,7 +3,7 @@ pipeline {
     registry = "uday4r4nds/microserviceone"
     registryCredential = 'Dockerhub'
     dockerImage = ''
-    JENKINS_HOME=Home/Jenkins
+    JENKINS_HOME='Home/Jenkins'
   }
   agent any
   stages {
