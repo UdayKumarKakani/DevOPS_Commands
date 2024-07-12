@@ -6,7 +6,7 @@ pipeline {
   }
   agent any
   stages {
-    stage('Cloning Git') {
+    stage('Test') {
       steps {
         echo "$USER"
         sh whoami
