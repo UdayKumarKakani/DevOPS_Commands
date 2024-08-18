@@ -178,3 +178,28 @@ pipeline {
     }
 
 }
+
+
+pipeline {
+    agent any
+    stages {
+        stage('Initialize'){
+                echo "$PATH"
+            }
+        stage('Build') {
+            agent {
+                docker {
+                    image 'node:20.15.1-alpine3.20'
+                    args '-v /var/run/docker.sock:/var/run/docker.sock'
+                }
+            }
+            steps {
+                script {
+                    docker.image('node:20.15.1-alpine3.20').inside {
+                        sh 'node --version'
+                    }
+                }
+            }
+        }
+    }
+}
