@@ -1,0 +1,40 @@
+### **Steps to Install Docker on a Windows Machine**
+
+#### 1. **Check Windows Version Compatibility**
+   Docker Desktop requires Windows 10 or 11 with WSL 2 (Windows Subsystem for Linux). Make sure you have a compatible version:
+   - Windows 10 64-bit: Pro, Enterprise, or Education (Build 19041 or higher)
+   - Windows 11 64-bit: Pro, Enterprise, or Education (All editions)
+
+#### 2. **Enable WSL 2**
+   WSL 2 (Windows Subsystem for Linux) is required for Docker Desktop on Windows.
+   - Open PowerShell as Administrator and run the following command to enable WSL and the Virtual Machine Platform:
+     ```powershell
+     wsl --install
+     ```
+
+   This will enable WSL 2 and install Ubuntu as the default Linux distribution.
+
+#### 3. **Download Docker Desktop**
+   - Go to the [Docker website](https://www.docker.com/products/docker-desktop) and download the Docker Desktop installer for Windows.
+   - Run the installer and follow the installation steps.
+
+#### 4. **Configuration**
+   - During installation, select the option to enable the **Use WSL 2 instead of Hyper-V** (it should be selected by default).
+   - After installation, Docker Desktop will prompt you to restart the machine.
+
+#### 5. **Verify Docker Installation**
+   - Open PowerShell and run the following command to check if Docker is installed correctly:
+     ```powershell
+     docker --version
+     ```
+   - You should see the Docker version output.
+
+#### 6. **Run a Test Docker Container**
+   - Now you can test Docker by running a simple container like Nginx:
+     ```powershell
+     docker run hello-world
+     ```
+
+   This will pull the "hello-world" image and run a container.
+
+---
