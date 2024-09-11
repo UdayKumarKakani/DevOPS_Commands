@@ -38,3 +38,124 @@
    This will pull the "hello-world" image and run a container.
 
 ---
+
+Here are the steps to install Docker on a Linux machine, using **Ubuntu** as an example. These steps should also work with other Debian-based distributions. For other distributions like CentOS, Fedora, or Arch, the steps will vary slightly, but the general process is the same.
+
+---
+
+### **Steps to Install Docker on Linux (Ubuntu)**
+
+#### 1. **Update the Package List**
+   Before installing Docker, it's a good idea to update your system’s package list to ensure you’re getting the latest versions.
+   ```bash
+   sudo apt-get update
+   ```
+
+#### 2. **Install Required Dependencies**
+   Docker requires a few dependencies to work properly. Install them using the following command:
+   ```bash
+   sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
+   ```
+
+#### 3. **Add Docker's Official GPG Key**
+   To ensure that the Docker packages are authentic, you need to add Docker’s official GPG key:
+   ```bash
+   curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+   ```
+
+#### 4. **Set Up the Stable Repository**
+   Add the Docker repository to your system so you can install Docker from it:
+   ```bash
+   echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+   ```
+
+#### 5. **Update the Package List Again**
+   After adding Docker’s official repository, update the package list again:
+   ```bash
+   sudo apt-get update
+   ```
+
+#### 6. **Install Docker Engine**
+   Now that everything is set up, install Docker using the following command:
+   ```bash
+   sudo apt-get install docker-ce docker-ce-cli containerd.io
+   ```
+
+   - `docker-ce` is the Docker Community Edition (the main Docker package).
+   - `docker-ce-cli` is the command-line interface to manage Docker.
+   - `containerd.io` is Docker's container runtime.
+
+#### 7. **Check Docker Installation**
+   Once installed, you can verify that Docker is working correctly by running:
+   ```bash
+   sudo docker --version
+   ```
+
+   This should output the version of Docker installed, something like `Docker version 20.10.x`.
+
+#### 8. **Run a Test Docker Container**
+   To make sure Docker is installed and running correctly, run the hello-world container:
+   ```bash
+   sudo docker run hello-world
+   ```
+
+   This will download a test image and run a container to verify that everything is working. If successful, you’ll see a message that says "Hello from Docker!"
+
+#### 9. **(Optional) Manage Docker as a Non-Root User**
+   By default, Docker commands need to be run with `sudo`. If you want to run Docker as a non-root user, you can add your user to the Docker group:
+   ```bash
+   sudo usermod -aG docker $USER
+   ```
+
+   After this, log out and back in for the changes to take effect, or run:
+   ```bash
+   newgrp docker
+   ```
+
+#### 10. **Enable Docker to Start on Boot**
+   If you want Docker to start automatically when your system boots up, run:
+   ```bash
+   sudo systemctl enable docker
+   ```
+
+---
+
+### **Common Docker Commands to Test**
+
+1. **List Docker Containers** (Running Containers):
+   ```bash
+   docker ps
+   ```
+
+2. **List All Containers** (Running + Stopped):
+   ```bash
+   docker ps -a
+   ```
+
+3. **List Docker Images**:
+   ```bash
+   docker images
+   ```
+
+4. **Run an Nginx Container** (Web server):
+   ```bash
+   docker run -d -p 8080:80 nginx
+   ```
+   This will run an Nginx container and map port `8080` on your host to port `80` in the container. You can access the Nginx server at `http://localhost:8080`.
+
+---
+
+### **Uninstalling Docker (Optional)**
+   If you need to remove Docker, you can do so using the following commands:
+
+   1. Remove Docker packages:
+      ```bash
+      sudo apt-get purge docker-ce docker-ce-cli containerd.io
+      ```
+
+   2. Remove Docker images, containers, and volumes:
+      ```bash
+      sudo rm -rf /var/lib/docker
+      ```
+
+---
