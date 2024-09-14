@@ -1,6 +1,7 @@
 # Check the version of Docker installed
 docker --version
 
+
 docker build -t uday4r4nds/azuredevopsb1python:0.0.1.RELEASE .
 uday4r4nds/azuredevopsb1python
 
